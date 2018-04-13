@@ -1,6 +1,10 @@
 import requests
 
 def send2ifttt(key,event,value1="_",value2="_",value3="_"):
+    proxies = {
+        'http': 'EU\NG6EADA:Password123%25@fr0-proxylan-vip.eu.airbus.corp:3128',
+        'https': 'EU\NG6EADA:Password123%25@fr0-proxylan-vip.eu.airbus.corp:3128'
+    }
 
     headers = {
         'Content-Type': 'application/json',
@@ -10,7 +14,7 @@ def send2ifttt(key,event,value1="_",value2="_",value3="_"):
 
     print data
     print 'https://maker.ifttt.com/trigger/{}/with/key/{}'.format(event,key)
-    response = requests.post('https://maker.ifttt.com/trigger/{}/with/key/{}'.format(event,key), headers=headers, data=data)
+    response = requests.post('http://maker.ifttt.com/trigger/{}/with/key/{}'.format(event,key), headers=headers, data=data,proxies=proxies)
 
 
 def generateOrderValue(symbol,price,qty):
