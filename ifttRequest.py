@@ -14,8 +14,8 @@ class IftttMessage:
     def send2ifttt(self, key, event, value1="_", value2="_", value3="_"):
         if 'BNDA' == socket.gethostname()[:4]:
             proxies = {
-                'http': 'EU\NG6E4BC:samePassword123%23@fr0-proxylan-vip.eu.airbus.corp:3128',
-                'https': 'EU\NG6E4BC:samePassword123%23@fr0-proxylan-vip.eu.airbus.corp:3128',
+                'http': ,
+                'https': ,
             }
         else:
             proxies = {
