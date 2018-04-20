@@ -1,3 +1,4 @@
+//browserify apstxAccessToken.js -o bundle.js
 var Upstox = require("upstox");
 api =  "mOq86xk9sq7urT6eb21PX54hDoUbW1OM9Xch0x2h"
 secret = "xhjidqia8h"
