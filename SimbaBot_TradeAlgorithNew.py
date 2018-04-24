@@ -106,16 +106,13 @@ class SimbhaBrain:
                 self.buy = False
                 self.sell = True
                 print('buy')
-                timedifference = time.time() - time.mktime(df.timestamp[currentIndex].timetuple())
-                print(timedifference)
-                if timedifference < 3100:
-                    self.buynowindex = currentIndex + 1
-                    if self.buynowindex not in self.stockbuycheck:  # to stop repetation on buying the same stock
-                        self.placeOrder("BUY", self.stockinstrument, df['open'][self.buynowindex],
-                                        self.buynowindex, 'BUY')  # placeorder
-                        IftttMessage(self.stockinstrument, df['open'][self.buynowindex], 'BUY')
-                        self.stockbuycheck.append(self.buynowindex)
-                        print('buy price ', df['open'][self.buynowindex], 'buy index ', self.buynowindex)
+                self.buynowindex = currentIndex
+                if self.buynowindex not in self.stockbuycheck:  # to stop repetation on buying the same stock
+                    self.placeOrder("BUY", self.stockinstrument, df['open'][self.buynowindex],
+                                    self.buynowindex, 'BUY')  # placeorder
+                    IftttMessage(self.stockinstrument, df['open'][self.buynowindex], 'BUY')
+                    self.stockbuycheck.append(self.buynowindex)
+                    print('buy price ', df['open'][self.buynowindex], 'buy index ', self.buynowindex)
             else:
                 buy.append(False)
         else:
@@ -131,16 +128,13 @@ class SimbhaBrain:
                 self.buy = True
                 self.sell = False
                 print('sell')
-                timedifference = time.time() - time.mktime(df.timestamp[currentIndex].timetuple())
-                print(timedifference)
-                if timedifference < 3100:
-                    self.sellnowindex = currentIndex + 1
-                    if self.sellnowindex not in self.stockbuycheck:
-                        self.placeOrder("SELL", self.stockinstrument, df['open'][self.sellnowindex],
-                                        self.sellnowindex, 'SELL')  # placeorder
-                        IftttMessage(self.stockinstrument, df['open'][self.sellnowindex], 'SELL')
-                        self.stockbuycheck.append(self.buynowindex)
-                        print('sell price ', df['open'][self.sellnowindex], 'sell index ', self.sellnowindex)
+                self.sellnowindex = currentIndex
+                if self.sellnowindex not in self.stockbuycheck:
+                    self.placeOrder("SELL", self.stockinstrument, df['open'][self.sellnowindex],
+                                    self.sellnowindex, 'SELL')  # placeorder
+                    IftttMessage(self.stockinstrument, df['open'][self.sellnowindex], 'SELL')
+                    self.stockbuycheck.append(self.sellnowindex)
+                    print('sell price ', df['open'][self.sellnowindex], 'sell index ', self.sellnowindex)
             else:
                 sell.append(False)
         else:
@@ -157,17 +151,14 @@ class SimbhaBrain:
                 self.shortsell = False
                 self.shortbuy = True
                 print('shorsell')
-                timedifference = time.time() - time.mktime(df.timestamp[currentIndex].timetuple())
-                print(timedifference)
-                if timedifference < 3100:
-                    self.shortsellnowindex = currentIndex + 1
-                    if self.shortsellnowindex not in self.stockbuycheck:
-                        self.placeOrder("SELL", self.stockinstrument, df['open'][self.shortsellnowindex],
-                                        self.shortsellnowindex, 'ShortSell')  # placeorder
-                        IftttMessage(self.stockinstrument, df['open'][self.shortsellnowindex], 'ShortSell')
-                        self.stockbuycheck.append(self.shortsellnowindex - 1)
-                        print('short sell price ', df['open'][self.shortsellnowindex],
-                              'ShortSell index ', self.shortsellnowindex)
+                self.shortsellnowindex = currentIndex
+                if self.shortsellnowindex not in self.stockbuycheck:
+                    self.placeOrder("SELL", self.stockinstrument, df['open'][self.shortsellnowindex],
+                                    self.shortsellnowindex, 'ShortSell')  # placeorder
+                    IftttMessage(self.stockinstrument, df['open'][self.shortsellnowindex], 'ShortSell')
+                    self.stockbuycheck.append(self.shortsellnowindex)
+                    print('short sell price ', df['open'][self.shortsellnowindex],
+                          'ShortSell index ', self.shortsellnowindex)
             else:
                 shortsell.append(False)
         else:
@@ -180,16 +171,13 @@ class SimbhaBrain:
                 self.shortsell = True
                 self.shortbuy = False
                 print('shorbuy')
-                self.shortbuynowindex = currentIndex + 1
-                timedifference = time.time() - time.mktime(df.timestamp[currentIndex].timetuple())
-                print(timedifference)
-                if timedifference < 3100:
-                    if self.shortbuynowindex not in self.stockbuycheck:
-                        self.placeOrder("BUY", self.stockinstrument, df['close'][self.shortbuynowindex],
-                                        self.shortbuynowindex, 'ShortBuy')  # placeorder
-                        IftttMessage(self.stockinstrument, df['close'][self.shortbuynowindex], 'ShortSell')
-                        self.stockbuycheck.append(self.shortbuynowindex)
-                        print ('short Buy', df['close'][self.shortbuynowindex], 'ShortBuy Index ', self.shortbuynowindex)
+                self.shortbuynowindex = currentIndex
+                if self.shortbuynowindex not in self.stockbuycheck:
+                    self.placeOrder("BUY", self.stockinstrument, df['close'][self.shortbuynowindex],
+                                    self.shortbuynowindex, 'ShortBuy')  # placeorder
+                    IftttMessage(self.stockinstrument, df['close'][self.shortbuynowindex], 'ShortBuy')
+                    self.stockbuycheck.append(self.shortbuynowindex)
+                    print ('short Buy', df['close'][self.shortbuynowindex], 'ShortBuy Index ', self.shortbuynowindex)
             else:
                 shortbuy.append(False)
         else:
@@ -276,3 +264,4 @@ if __name__ == '__main__':
     driver = "C:\Users\NG6E4BC\Documents\DoNotDelete\chromedriver_win32\chromedriver.exe"
 
     SimbhaBrain(filename)
+
